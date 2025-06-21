@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined, ThunderboltFilled } from "@ant-design/icons";
 import { Drawer, Button } from "antd";
+import DrawerContent from "../components/Drawer/Drawer";
 
 const Dashboard = () => {
   const [openPanel, setOpenPanel] = useState(false);
   return (
     <>
       <div className="flex flex-col w-full h-full bg-[#161618] text-[#FFFFFF] border-2 border-[#525252] px-[40px] py-[20px]">
-        <div className="flex w-full justify-between items-center">
-          <div className="text-[32px] text-[#FFFFFF] font-bold">
-            Charging Station
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center space-x-[10px]">
+            <ThunderboltFilled style={{ fontSize: 24 }} />
+            <div className="text-[32px] text-[#FFFFFF] font-bold">
+              Charging Station
+            </div>
           </div>
           <div className="flex space-x-[10px]">
             <button
@@ -41,7 +45,7 @@ const Dashboard = () => {
           borderLeft: "1px solid #525252",
         }}
       >
-        <div className="text-[24px] font-medium text-[#FFFFFF]">drawer</div>
+        <DrawerContent />
       </Drawer>
     </>
   );
