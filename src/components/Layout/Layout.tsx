@@ -16,7 +16,7 @@ const NavLayout = () => {
         <Header className="bg-[#000000] h-[87px] items-center justify-center border-t-2 border-r-2 border-[#525252] rounded-tr-lg">
           <HeaderComponent />
         </Header>
-        <Content>
+        <Content className="flex flex-1">
           <Outlet />
         </Content>
       </Layout>

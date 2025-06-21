@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { UploadOutlined, ThunderboltFilled } from "@ant-design/icons";
 import { Drawer, Button } from "antd";
 import DrawerContent from "../components/Drawer/Drawer";
+import Chart from "../components/Graph/Chart";
 
 const Dashboard = () => {
   const [openPanel, setOpenPanel] = useState(false);
   return (
     <>
-      <div className="flex flex-col w-full h-full bg-[#161618] text-[#FFFFFF] border-2 border-[#525252] px-[40px] py-[20px]">
+      <div className="flex flex-col w-full h-full bg-[#161618] text-[#FFFFFF] border-2 border-[#525252] px-[40px] py-[20px] overflow-auto">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-[10px]">
             <ThunderboltFilled style={{ fontSize: 24 }} />
@@ -25,6 +26,29 @@ const Dashboard = () => {
             <div className="flex bg-[#242424] h-[39px] items-center justify-center px-[11px] border border-[#5A5A5A] rounded-md">
               <UploadOutlined />
             </div>
+          </div>
+        </div>
+        <div className="flex w-full">
+          <div className="text-[24px] font-semibold text-[#DCFF7FFD] pt-[40px] pb-[20px]">
+            Best Scenario Results
+          </div>
+        </div>
+        <div className="flex flex-col w-full space-y-[17px]">
+          <ResultContainer
+            title={
+              "The best found configuration based on profit is characterized by 11 zones (max) with charging stations and 48 total number of poles."
+            }
+          />
+          <ResultContainer
+            title={
+              "The best found configuration based on satisfied demand is characterized by 11 zones (max) with charging stations and 48 total number of poles."
+            }
+          />
+        </div>
+        <div className="flex-1 flex flex-row w-full justify-between items-center">
+          <div className="flex flex-col">
+            <div className="text-[24px]">Graphs</div>
+            <Chart />
           </div>
         </div>
       </div>
@@ -52,3 +76,12 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+const ResultContainer = (props: { title: string }) => {
+  const { title } = props;
+  return (
+    <div className="flex justify-between py-[14px] px-[10px] rounded-md text-[16px] font-medium border-[0.5px] border-[#C8E972] bg-[#CCFF0005] text-[#C9FF3B]">
+      {title}
+    </div>
+  );
+};
