@@ -14,6 +14,30 @@ import {
 import { Line } from "react-chartjs-2";
 import { ChartData } from "chart.js";
 
+const verticalLinePlugin = {
+  id: "verticalLine",
+  afterDraw: (chart: any) => {
+    if (chart.tooltip?._active?.length) {
+      const ctx = chart.ctx;
+      const activePoint = chart.tooltip._active[0].element;
+
+      const x = activePoint.x;
+      const y = activePoint.y;
+      const bottomY = chart.scales.y.bottom;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.setLineDash([6, 6]);
+      ctx.moveTo(x, y);
+      ctx.lineTo(x, bottomY);
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "#C9FF3B";
+      ctx.stroke();
+      ctx.restore();
+    }
+  },
+};
+
 ChartJS.register(
   LineElement,
   CategoryScale,
@@ -21,7 +45,8 @@ ChartJS.register(
   PointElement,
   Tooltip,
   Filler,
-  Legend
+  Legend,
+  verticalLinePlugin
 );
 
 const data: ChartData<"line"> = {
@@ -46,9 +71,13 @@ const data: ChartData<"line"> = {
 const options: ChartOptions<"line"> = {
   responsive: true,
   maintainAspectRatio: false,
+  interaction: {
+    mode: "index",
+    intersect: false,
+  },
   plugins: {
     tooltip: {
-      backgroundColor: "#1e1e1e",
+      backgroundColor: "#1E1E1E",
       borderColor: "#555",
       borderWidth: 1,
       titleColor: "#fff",
@@ -67,10 +96,10 @@ const options: ChartOptions<"line"> = {
   scales: {
     x: {
       ticks: {
-        color: "#BBBBBB",
+        color: "#FFFFFF",
       },
       grid: {
-        color: "#2c2c2c",
+        color: "#2C2C2C",
       },
     },
     y: {
@@ -79,11 +108,11 @@ const options: ChartOptions<"line"> = {
       beginAtZero: true,
       ticks: {
         stepSize: 20000,
-        color: "#BBBBBB",
+        color: "#FFFFFF",
         callback: (value: number | string) => `$${(+value / 1000).toFixed(0)}K`,
       },
       grid: {
-        color: "#2c2c2c",
+        color: "#2C2C2C",
       },
     },
   },
@@ -91,8 +120,8 @@ const options: ChartOptions<"line"> = {
 
 const Chart = () => {
   return (
-    <div className="bg-[##00000040] p-6 rounded-xl border border-[#333] w-[56%] h-full">
-      <div className="h-full min-h-[300px]">
+    <div className="bg-[#222324] p-6 rounded-xl border-[1px] border-[#525252] w-full h-full">
+      <div className="mt-[40px] h-full w-full min-h-[300px]">
         <Line data={data} options={options} />
       </div>
     </div>

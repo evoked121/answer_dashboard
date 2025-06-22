@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { UploadOutlined, ThunderboltFilled } from "@ant-design/icons";
-import { Drawer, Button } from "antd";
+import { Drawer } from "antd";
 import DrawerContent from "../components/Drawer/Drawer";
 import Chart from "../components/Graph/Chart";
+import { performanceIndicators } from "../utils/const";
 
 const Dashboard = () => {
   const [openPanel, setOpenPanel] = useState(false);
@@ -45,10 +46,27 @@ const Dashboard = () => {
             }
           />
         </div>
-        <div className="flex-1 flex flex-row w-full justify-between items-center">
-          <div className="flex flex-col">
-            <div className="text-[24px]">Graphs</div>
+        <div className="flex-1 flex flex-row mt-[40px] w-full items-start space-x-[20px]">
+          <div className="flex flex-col w-[56%] space-y-[20px]">
+            <div className="text-[24px] font-semibold">Graphs</div>
             <Chart />
+          </div>
+          <div className="flex-1 flex-col space-y-[20px]">
+            <div className="text-[24px] font-semibold">
+              Key Performance Indicators
+            </div>
+            <div className="flex flex-wrap w-full gap-3 items-center">
+              {performanceIndicators.map((indicator, id) => {
+                return (
+                  <Indicator
+                    key={id}
+                    title={indicator.title}
+                    content={indicator.content}
+                    index={indicator.index}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -82,6 +100,23 @@ const ResultContainer = (props: { title: string }) => {
   return (
     <div className="flex justify-between py-[14px] px-[10px] rounded-md text-[16px] font-medium border-[0.5px] border-[#C8E972] bg-[#CCFF0005] text-[#C9FF3B]">
       {title}
+    </div>
+  );
+};
+
+const Indicator = (props: {
+  title: string;
+  index: string;
+  content: string;
+}) => {
+  const { title, index, content } = props;
+  return (
+    <div className="flex flex-col px-[20px] py-[20px] bg-[#222324] border-[1px] border-[#525252] w-[48%] rounded-md space-y-[11px]">
+      <div className="text-[#FFFFFF] text-[18px] font-medium">{title}</div>
+      <div className="text-[#BBBBBB] text-[12px]">{content}</div>
+      <div className="pt-[25px] text-[24px] text-[#FFFFFF] font-bold ml-auto">
+        {index}
+      </div>
     </div>
   );
 };
