@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { SearchOutlined, RedoOutlined, StarFilled } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  RedoOutlined,
+  StarFilled,
+  PlusOutlined,
+  CheckOutlined,
+} from "@ant-design/icons";
 import { ConfigProvider, Input } from "antd";
 import { useProjStore } from "../../utils/proStore";
 
@@ -163,7 +169,13 @@ const VariableSelection = (props: {
               <span className="flex items-center">
                 {variable.content}
                 <StarFilled className="ml-4" style={{ fontSize: "10px" }} />
-                <span className="ml-1">{variable.isSelect ? "x" : "+"}</span>
+                <span className="flex ml-1 items-center">
+                  {variable.isSelect ? (
+                    <CheckOutlined style={{ fontSize: 10 }} />
+                  ) : (
+                    <PlusOutlined style={{ fontSize: 10 }} />
+                  )}
+                </span>
               </span>
             </div>
           );

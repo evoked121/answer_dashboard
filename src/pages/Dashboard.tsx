@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { UploadOutlined, ThunderboltFilled } from "@ant-design/icons";
+import {
+  UploadOutlined,
+  ThunderboltFilled,
+  QuestionCircleOutlined,
+  UndoOutlined,
+  DownOutlined,
+  UpOutlined,
+} from "@ant-design/icons";
 import { Drawer } from "antd";
 import DrawerContent from "../components/Drawer/Drawer";
 import Chart from "../components/Graph/Chart";
@@ -18,13 +25,16 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex space-x-[10px]">
+            <div className="flex bg-[#242424] h-[39px] items-center justify-center px-[11px] border border-[#5A5A5A] rounded-md cursor-pointer">
+              <UndoOutlined />
+            </div>
             <button
               className="bg-[#242424] h-[39px] border border-[#5A5A5A] rounded-md px-[4px]"
               onClick={() => setOpenPanel(true)}
             >
-              edit variable
+              Edit Variables
             </button>
-            <div className="flex bg-[#242424] h-[39px] items-center justify-center px-[11px] border border-[#5A5A5A] rounded-md">
+            <div className="flex bg-[#242424] h-[39px] items-center justify-center px-[11px] border border-[#5A5A5A] rounded-md cursor-pointer">
               <UploadOutlined />
             </div>
           </div>
@@ -112,7 +122,10 @@ const Indicator = (props: {
   const { title, index, content } = props;
   return (
     <div className="flex flex-col px-[20px] py-[20px] bg-[#222324] border-[1px] border-[#525252] w-[48%] rounded-md space-y-[11px]">
-      <div className="text-[#FFFFFF] text-[18px] font-medium">{title}</div>
+      <div className="flex items-center justify-between w-full">
+        <div className="text-[#FFFFFF] text-[18px] font-medium">{title}</div>
+        <QuestionCircleOutlined />
+      </div>
       <div className="text-[#BBBBBB] text-[12px]">{content}</div>
       <div className="pt-[25px] text-[24px] text-[#FFFFFF] font-bold ml-auto">
         {index}

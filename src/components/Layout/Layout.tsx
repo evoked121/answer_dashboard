@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 import HeaderComponent from "./Header";
+import Siderbar from "./Siderbar";
 
 const { Content, Sider, Header } = Layout;
 
@@ -11,7 +12,9 @@ const NavLayout = () => {
       <Sider
         width={80}
         className="bg-[#000000] border-l-2 border-t-2 border-[#525252] rounded-tl-lg rounded-bl-lg"
-      ></Sider>
+      >
+        <Siderbar />
+      </Sider>
       <Layout>
         <Header className="bg-[#000000] h-[87px] items-center justify-center border-t-2 border-r-2 border-[#525252] rounded-tr-lg">
           <HeaderComponent />
