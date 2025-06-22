@@ -11,6 +11,7 @@ import {
   Legend,
   ChartOptions,
 } from "chart.js";
+import { DownOutlined } from "@ant-design/icons";
 import { Line } from "react-chartjs-2";
 import { ChartData } from "chart.js";
 
@@ -120,7 +121,13 @@ const options: ChartOptions<"line"> = {
 
 const Chart = () => {
   return (
-    <div className="bg-[#222324] p-6 rounded-xl border-[1px] border-[#525252] w-full h-full">
+    <div className="flex flex-col bg-[#222324] p-6 rounded-xl border-[1px] border-[#525252] w-full h-full">
+      <div className="flex ml-auto items-center space-x-[5px] bg-[#18181A80] border-[1px] border-[#5A5A5AA1] rounded-md px-[10px] py-[4px] w-fit cursor-pointer">
+        <div className="text-[#FFFFFF] text-[12px] font-medium">
+          Unsatisfied Demand%
+        </div>
+        <DownOutlined style={{ color: "#FFFFFF" }} />
+      </div>
       <div className="mt-[40px] h-full w-full min-h-[300px]">
         <Line data={data} options={options} />
       </div>

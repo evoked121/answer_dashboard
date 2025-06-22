@@ -2,12 +2,15 @@ import React, { useRef, useState } from "react";
 import {
   SearchOutlined,
   RedoOutlined,
-  StarFilled,
   PlusOutlined,
   CheckOutlined,
+  DownOutlined,
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
 import { ConfigProvider, Input } from "antd";
 import { useProjStore } from "../../utils/proStore";
+import BrightStar from "../../assets/svg/bright-star.svg?url";
+import DarkStar from "../../assets/svg/dark-star.svg?url";
 
 type VariableInfo = Partial<{
   id: number;
@@ -31,26 +34,28 @@ const DrawerContent = () => {
     <div className="flex flex-col w-full items-center overflow-auto">
       {/**Header */}
       <div className="flex w-full items-center space-x-[5px]">
-        <ConfigProvider
-          theme={{
-            components: {
-              Input: {
-                activeBg: "#2C2E334D",
-                activeBorderColor: "#5A5A5A",
+        <div className="flex-grow">
+          <ConfigProvider
+            theme={{
+              components: {
+                Input: {
+                  activeBg: "#2C2E334D",
+                  activeBorderColor: "#5A5A5A",
+                },
               },
-            },
-          }}
-        >
-          <Input
-            prefix={<SearchOutlined style={{ color: "white", height: 30 }} />}
-            className="text-[#FFFFFF] bg-[#2C2E334D] border-[#5A5A5A]"
-          />
-        </ConfigProvider>
+            }}
+          >
+            <Input
+              prefix={<SearchOutlined style={{ color: "white", height: 30 }} />}
+              className="text-[#FFFFFF] bg-[#2C2E334D] border-[#5A5A5A]"
+            />
+          </ConfigProvider>
+        </div>
         <button
-          className="flex flex-row items-center space-x-[8px] bg-[#242424] text-[#FFFFFF] h-[39px] border border-[#5A5A5A] rounded-md px-[4px]"
+          className="flex flex-row items-center space-x-[4px] bg-[#242424] text-[#FFFFFF] h-[39px] border border-[#5A5A5A] rounded-md px-[4px]"
           onClick={() => {}}
         >
-          <StarFilled />
+          <img src={DarkStar} alt="icon" className="w-4" />
           <span>Autofill</span>
         </button>
         <button
@@ -91,8 +96,11 @@ const DrawerContent = () => {
       </div>
       {hoveredVariable && (
         <div className="flex flex-col w-full bg-[#222324] border-[1px] border-[#525252] px-[20px] py-[30px] rounded-br-md rounded-bl-md duration-600 ease-in-out">
-          <div className="text-[#FFFFFF] font-medium text-[20px]">
-            {hoveredVariable.content}
+          <div className="flex flex-row items-center space-x-[10px]">
+            <div className="text-[#FFFFFF] font-medium text-[20px]">
+              {hoveredVariable.content}
+            </div>
+            <QuestionCircleOutlined style={{ color: "#FFFFFF" }} />
           </div>
           <div className="text-[15px] text-[#BBBBBB] font-normal mt-[15px]">
             But what truly sets Switch apart is its versatility. It can be used
@@ -103,14 +111,20 @@ const DrawerContent = () => {
         </div>
       )}
       <div className="flex flex-col w-full space-y-[15px] mt-[18px]">
-        <div className="flex flex-col w-full bg-[#222324] border-[1px] border-[#525252] px-[20px] py-[8px] rounded-md">
+        <div className="flex items-center justify-between w-full bg-[#222324] border-[1px] border-[#525252] px-[20px] py-[8px] rounded-md">
           <div className="text-[#C8E972] font-medium text-[20px]">
             Primary Variables
           </div>
+          <div className="flex items-center justify-between rounded-[16px] border-[1px] border-[#C9FF3B] py-[5px] px-[10px] cursor-pointer">
+            <DownOutlined style={{ color: "#C9FF3B" }} />
+          </div>
         </div>
-        <div className="flex flex-col w-full bg-[#222324] border-[1px] border-[#525252] px-[20px] py-[8px] rounded-md">
+        <div className="flex items-center justify-between w-full bg-[#222324] border-[1px] border-[#525252] px-[20px] py-[8px] rounded-md">
           <div className="text-[#C8E972] font-medium text-[20px]">
             Secondary Variables
+          </div>
+          <div className="flex items-center justify-between rounded-[16px] border-[1px] border-[#C9FF3B] py-[5px] px-[10px] cursor-pointer">
+            <DownOutlined style={{ color: "#C9FF3B" }} />
           </div>
         </div>
       </div>
@@ -166,17 +180,23 @@ const VariableSelection = (props: {
                 handleSelect(variables, setVariable, id);
               }}
             >
-              <span className="flex items-center">
-                {variable.content}
-                <StarFilled className="ml-4" style={{ fontSize: "10px" }} />
-                <span className="flex ml-1 items-center">
-                  {variable.isSelect ? (
-                    <CheckOutlined style={{ fontSize: 10 }} />
-                  ) : (
-                    <PlusOutlined style={{ fontSize: 10 }} />
-                  )}
-                </span>
-              </span>
+              <div className="flex items-center space-x-[18px]">
+                <span>{variable.content}</span>
+                <div className="flex items-center space-x-[1px]">
+                  <img
+                    src={variable.isSelect ? BrightStar : DarkStar}
+                    alt="icon"
+                    className="w-3"
+                  />
+                  <span className="flex items-center">
+                    {variable.isSelect ? (
+                      <CheckOutlined style={{ fontSize: 10 }} />
+                    ) : (
+                      <PlusOutlined style={{ fontSize: 10 }} />
+                    )}
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}
