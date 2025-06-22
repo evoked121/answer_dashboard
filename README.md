@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+# Answer Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based dashboard application with Firebase authentication and interactive data visualization.
 
-## Available Scripts
+## Setup Instructions
 
-In the project directory, you can run:
+1. **Install dependencies:**
 
-### `npm start`
+   ```bash
+   npm install
+   ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. **Environment variables:**
+   The `.env` file is included in the repository with Firebase configuration.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+3. **Start development server:**
+   ```bash
+   npm start
+   ```
 
-### `npm test`
+## Features Implemented
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Required Interactions
 
-### `npm run build`
+1. **Slide-Over Variable Editing Card Interaction**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   - Triggered by clicking the "Edit Variables" button on the dashboard
+   - Opens a slide-over card with smooth transitions
+   - Allows users to modify variables used in visualization
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Data Point Hover Interaction**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   - Triggered by hovering over data points in the main graph
+   - Reveals detailed information cards with fade-in animations
+   - Beautiful and intuitive user experience
 
-### `npm run eject`
+3. **Variable Selection Interaction**
+   - Users can select variables from the "Variables Panel"
+   - Hovering displays contextual information
+   - Includes state management for active/inactive variable states
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Authentication
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Google Sign-in via Firebase
+- Protected routes with automatic redirects
+- User session management
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### UI/UX
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Responsive design following Figma specifications
+- Modern UI with Tailwind CSS and Ant Design
+- Smooth animations and transitions
 
-## Learn More
+## Technical Decisions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### State Management
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Zustand**: Chosen for its simplicity and performance
+- Centralized state management for variables and user data
+- Lightweight alternative to Redux
+
+### Technology Stack
+
+- **React 19**: Latest React features and performance improvements
+- **TypeScript**: Type safety and better developer experience
+- **Firebase**: Authentication and backend services
+- **Tailwind CSS**: Utility-first CSS framework
+- **Ant Design**: UI component library
+- **Chart.js**: Data visualization library
+
+### Architecture
+
+- Component-based architecture with clear separation of concerns
+- Context API for authentication state
+- Custom componenets for reusable logic
+
+## Known Limitations
+
+- Cross-Origin-Opener-Policy warnings in development environment
+- Limited to Google authentication method
+- No offline functionality
+
+## Development Time
+
+- **Total**: ~6 hours
+- **Authentication**: 30 minutes
+- **UI Implementation**: 3 hours
+- **Interactions**: 2 hours
+- **Testing & Polish**: 1 hour
+
+## Local Development
+
+1. Clone the repository
+2. Run `npm install`
+3. Start with `npm start`
+4. Access at `http://localhost:3000`
+
+The application will automatically redirect to login if not authenticated.
